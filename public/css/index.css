@@ -10,9 +10,14 @@
 	--color-gray-50: #C0C0C0;
 	--color-gray-90: #333;
 
+	--color-blue-10: rgba(232,238,242);
+	--color-blue-90: rgba(76, 92, 178, 1); 
+
+	--color-red-80: rgba(196, 107, 106);
+
 	--background-color: #fff;
 
-	--text-color: var(--color-gray-90);
+	--text-color: var(--color-blue-90);
 	--text-color-link: #082840;
 	--text-color-link-active: #5f2b48;
 	--text-color-link-visited: #17050F;
@@ -20,20 +25,20 @@
 	--syntax-tab-size: 2;
 }
 
-@media (prefers-color-scheme: dark) {
+/* @media (prefers-color-scheme: dark) {
 	:root {
 		--color-gray-20: #e0e0e0;
 		--color-gray-50: #C0C0C0;
 		--color-gray-90: #dad8d8;
 
 		/* --text-color is assigned to --color-gray-_ above */
-		--text-color-link: #1493fb;
+		/* --text-color-link: #1493fb;
 		--text-color-link-active: #6969f7;
 		--text-color-link-visited: #a6a6f8;
 
-		--background-color: #15202b;
+		 --background-color: #15202b; 
 	}
-}
+} */
 
 
 /* Global stylesheet */
@@ -53,7 +58,9 @@ html {
 	overflow-y: scroll;
 }
 body {
+
 	max-width: 40em;
+	padding: 2rem;
 }
 
 /* https://www.a11yproject.com/posts/how-to-hide-content/ */
@@ -90,25 +97,18 @@ a[href]:active {
 }
 
 main {
-	padding: 1rem;
-}
-main :first-child {
-	margin-top: 0;
+	background: var(--color-blue-10);
+
+	padding: 0 1rem;
 }
 
-header {
-	border-bottom: 1px dashed var(--color-gray-20);
-}
-header:after {
-	content: "";
-	display: table;
-	clear: both;
+main :first-child {
+	margin-top: 0;
 }
 
 .links-nextprev {
 	list-style: none;
 	border-top: 1px dashed var(--color-gray-20);
-	padding: 1em 0;
 }
 
 table {
@@ -144,19 +144,21 @@ code {
 
 /* Header */
 header {
-	display: flex;
-	gap: 1em .5em;
-	flex-wrap: wrap;
-	align-items: center;
-	padding: 1em;
+
 }
 .home-link {
 	font-size: 1em; /* 16px /16 */
 	font-weight: 700;
 	margin-right: 2em;
+	text-align: center;
 }
 .home-link:link:not(:hover) {
 	text-decoration: none;
+}
+
+h1 {
+	margin: 0;
+	color: Var(--color-blue-90);
 }
 
 /* Nav */
@@ -167,8 +169,9 @@ header {
 	list-style: none;
 }
 .nav-item {
-	display: inline-block;
-	margin-right: 1em;
+	border: 1px solid var(--color-blue-90);
+	margin-left: -1px;
+	padding: .5rem;
 }
 .nav-item a[href]:not(:hover) {
 	text-decoration: none;
@@ -181,30 +184,43 @@ header {
 .postlist {
 	list-style: none;
 	padding: 0;
-	padding-left: 1.5rem;
 }
-.postlist-item {
+.postlist-item {	
+	border-bottom:  1px solid var(--color-blue-90);
+	border-top:  1px solid var(--color-blue-90);
+	margin-top: -1px;
 	display: flex;
-	flex-wrap: wrap;
-	align-items: baseline;
 	counter-increment: start-from -1;
-	margin-bottom: 1em;
+	 align-items: stretch;
 }
 .postlist-item:before {
-	display: inline-block;
 	pointer-events: none;
 	content: "" counter(start-from, decimal-leading-zero) ". ";
 	line-height: 100%;
 	text-align: right;
-	margin-left: -1.5rem;
+	border-right:  1px solid var(--color-blue-90);	
+	padding: .5rem 1.25rem ;
+	align-items: baseline;
+	width: 37.5px;
+	flex-grow: 1;
+
+
 }
 .postlist-date,
 .postlist-item:before {
 	font-size: 0.8125em; /* 13px /16 */
 	color: var(--color-gray-90);
+
 }
 .postlist-date {
+	border-left:  1px solid var(--color-blue-90);	
+	padding: .5rem 1.25rem ;
+	align-items: baseline;
 	word-spacing: -0.5px;
+	width: 37.5px;
+	flex-grow: 1;
+
+
 }
 .postlist-link {
 	font-size: 1.1875em; /* 19px /16 */
@@ -267,4 +283,68 @@ a[href].header-anchor:focus,
 
 h2 + .header-anchor {
 	font-size: 1.5em;
+}
+
+.header-marquee {
+	position: relative;
+	overflow: hidden;
+	width: 100%;
+	height: 24px;
+}
+.header-marquee--inner {
+	height: 24px;
+	position: absolute;
+	width: 100%;
+	/* transform: translateX(100%); */
+	/* animation: scroll-left 20s linear infinite; */
+	letter-spacing: 2px;
+}
+
+.header-marquee--inner p {
+margin: 0;
+}
+
+/* @keyframes scroll-left {
+	0% {
+			transform: translateX(0);
+	}
+	100% {
+			transform: translateX(-100%);
+	}
+} */
+
+.header-table {
+	display: grid;
+	grid-template-columns: 1fr 1fr 1fr 1fr 2fr;
+	border: 1px solid var(--color-blue-90);
+	text-align: center;
+	width: 100%;
+}
+
+.header-table h3 {
+	font-size: .9rem;
+	font-weight: normal;
+	margin-top: 0;
+}
+
+.header-table--table, .header-table--guests, .header-table--server {
+		border-left: 1px solid var(--color-blue-90);
+}
+
+.header-table--number {
+	border-left: 1px solid var(--color-blue-90);
+	color: var(--color-red-80);
+	font-family: 'Courier New', Courier, monospace;
+	font-size: 2rem;
+	display: grid;
+	align-items: center;
+	/* font-weight: bold; */
+
+}
+
+
+footer {
+		border-top: 1px dashed var(--color-gray-20);
+		margin-top: 1rem;
+		padding-top: 1rem;
 }

@@ -27,9 +27,6 @@
 #}
 		<style>
 		{% include "public/css/index.css" %}
-		{% include "public/css/message-box.css" %}
-		{% include "node_modules/prismjs/themes/prism-okaidia.css" %}
-		{% include "public/css/prism-diff.css" %}
 		</style>
 {#
 		3. You could even swap between the two methods above using {% if eleventy.env.runMode === "serve" %}
@@ -44,24 +41,49 @@
 		<a href="#skip" class="visually-hidden">Skip to main content</a>
 
 		<header>
-			<a href="/" class="home-link">{{ metadata.title }}</a>
+	
+			<a href="/" class="home-link"><h1>{{ metadata.title }}</h1></a>
 
-			{#- Read more about `eleventy-navigation` at https://www.11ty.dev/docs/plugins/navigation/ #}
-			<nav>
-				<h2 class="visually-hidden">Top level navigation menu</h2>
-				<ul class="nav">
-				{%- for entry in collections.all | eleventyNavigation %}
-					<li class="nav-item"><a href="{{ entry.url }}"{% if entry.url == page.url %} aria-current="page"{% endif %}>{{ entry.title }}</a></li>
-				{%- endfor %}
-				</ul>
-			</nav>
+			<div class="header-table">
+				<div class="header-table--date">
+					<h3>Date</h3>
+					<p>2021-08-25</p>
+					</div>
+				<div class="header-table--table">
+					<h3>Table</h3>
+					<p>4</p>
+				</div>
+				<div class="header-table--guests">
+					<h3>Guests</h3>
+					<p>&nbsp;</p>
+				</div>
+				<div class="header-table--server">
+					<h3>Server</h3>
+					<p>SK</p>
+				</div>				
+				<div class="header-table--number">0825214</div>
+			</div>
+			<div class="header-marquee">
+				<div class="header-marquee--inner">
+				<p> &nbsp; APPT — SOUP/SAL — ENTREE — VEG/POT — DESSERT — BEV </p>
+			</div>
 		</header>
 
 		<main id="skip">
 			{{ content | safe }}
 		</main>
 
-		<footer></footer>
+		<footer>
+						<nav>
+				<h2 class="visually-hidden">Top level navigation menu</h2>
+				<ul class="nav">
+				{%- for entry in collections.all | eleventyNavigation %}
+					<li class="nav-item"><a href="{{ entry.url }}"{% if entry.url == page.url %} aria-current="page"{% endif %}>{{ entry.title }}</a></li>
+				{%- endfor %}
+				</ul>
+				<div class="header-table--number">0825214</div>
+			</nav>
+		</footer>
 
 		<!-- Current page: {{ page.url | htmlBaseUrl }} -->
 	</body>
